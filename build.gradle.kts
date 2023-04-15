@@ -23,9 +23,14 @@ kotlin {
         val jvmMain by getting {
             dependencies {
                 implementation(compose.desktop.currentOs)
+                implementation("androidx.compose.ui:ui-tooling-preview:1.4.0")
             }
         }
-        val jvmTest by getting
+        val jvmTest by getting {
+            dependencies {
+                implementation("androidx.compose.ui:ui-tooling:1.4.0")
+            }
+        }
     }
 }
 
