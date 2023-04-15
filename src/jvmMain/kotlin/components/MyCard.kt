@@ -38,7 +38,7 @@ fun MyCard() {
                 Line("Card", FontWeight.W900, Color.Green),
                 Line("Section")
             ))
-            MyButton()
+            MyButton("Click me")
         }
     }
 }

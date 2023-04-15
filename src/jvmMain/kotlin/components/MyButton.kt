@@ -1,18 +1,26 @@
 package components
 
 import androidx.compose.desktop.ui.tooling.preview.Preview
-import androidx.compose.material.Button
-import androidx.compose.material.Text
+import androidx.compose.material.*
 import androidx.compose.runtime.*
 
 @Preview
 @Composable
-fun MyButton() {
-    var text by remember { mutableStateOf("Hello, World!") }
+fun MyButton(string: String) {
+    var text by remember { mutableStateOf(string) }
+    var enabled by remember {
+        mutableStateOf(true)
+    }
 
-    Button(onClick = {
-        text = "Hello, Desktop!"
-    }) {
+    val onClick = {
+        text = "Pressed!"
+        enabled = false
+    }
+
+    Button(
+        onClick,
+        enabled = enabled
+    ) {
         Text(text)
     }
 }
