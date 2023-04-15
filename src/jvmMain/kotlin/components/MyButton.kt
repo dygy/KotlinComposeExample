@@ -1,10 +1,9 @@
 package components
 
-import androidx.compose.desktop.ui.tooling.preview.Preview
-import androidx.compose.material.*
+import androidx.compose.material.Button
+import androidx.compose.material.Text
 import androidx.compose.runtime.*
 
-@Preview
 @Composable
 fun MyButton(string: String) {
     var text by remember { mutableStateOf(string) }

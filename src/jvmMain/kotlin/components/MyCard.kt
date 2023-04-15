@@ -11,7 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import data.Line
+import data.LineSubstring
 
 @Preview
 @Composable
@@ -27,18 +27,27 @@ fun MyCard() {
         Column(
             modifier = Modifier.padding(15.dp)
         ) {
-            MyLine(arrayOf<Line>(
-                Line("Welcome to"),
-                Line(
-                "Jetpack Compose Playground",
-                FontWeight.W900,
-                Color.Cyan
-                ),
-                Line("Now you are in the"),
-                Line("Card", FontWeight.W900, Color.Green),
-                Line("Section")
-            ))
+            MyLine(
+                arrayOf<LineSubstring>(
+                    LineSubstring("Welcome to"),
+                    LineSubstring(
+                        "Jetpack Compose Playground",
+                        FontWeight.W900,
+                        Color.Cyan
+                    ),
+                    LineSubstring("Now you are in the"),
+                    LineSubstring("Card", FontWeight.W900, Color.Green),
+                    LineSubstring("Section")
+                )
+            )
             MyButton("Click me")
+            MyTable(
+                modifier = Modifier.fillMaxHeight().padding(6.dp),
+                columnCount = 3,
+                rowCount = 10,
+                cellContent = { columnIndex, rowIndex ->
+                    MyText(" Column: $columnIndex - Row: $rowIndex ")
+                })
         }
     }
 }
