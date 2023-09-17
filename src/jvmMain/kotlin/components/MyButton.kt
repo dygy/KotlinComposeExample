@@ -1,25 +1,18 @@
 package components
 
-import androidx.compose.material.Button
-import androidx.compose.material.Text
+import androidx.compose.material.*
 import androidx.compose.runtime.*
+import androidx.compose.ui.graphics.Color
 
 @Composable
-fun MyButton(string: String) {
-    var text by remember { mutableStateOf(string) }
-    var enabled by remember {
-        mutableStateOf(true)
-    }
-
-    val onClick = {
-        text = "Pressed!"
-        enabled = false
-    }
-
+fun MyButton(string: String, enabled: Boolean, setValue: () -> Unit) {
     Button(
-        onClick,
-        enabled = enabled
+        setValue,
+        colors = when(enabled) {
+            true -> ButtonDefaults.outlinedButtonColors(backgroundColor = Color.Yellow)
+            false -> ButtonDefaults.outlinedButtonColors(backgroundColor = Color.Magenta)
+        }
     ) {
-        Text(text)
+        Text(string)
     }
 }

@@ -1,14 +1,13 @@
 package components
 
 import androidx.compose.desktop.ui.tooling.preview.Preview
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxHeight
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.*
 import androidx.compose.material.Card
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import data.LineSubstring
@@ -16,6 +15,16 @@ import data.LineSubstring
 @Preview
 @Composable
 fun MyCard() {
+    var isEnabled by remember { mutableStateOf(true)  } ;
+    var buttonText by remember { mutableStateOf("Show image") }
+    val setValue = {
+        println(isEnabled)
+        isEnabled = !isEnabled
+        buttonText = when(isEnabled) {
+            true -> "Show image"
+            false -> "Show table"
+        }
+    }
     Card(
         backgroundColor = Color.DarkGray,
         modifier = Modifier
@@ -40,14 +49,24 @@ fun MyCard() {
                     LineSubstring("Section")
                 )
             )
-            MyButton("Click me")
-            MyTable(
-                modifier = Modifier.fillMaxHeight().padding(6.dp),
-                columnCount = 3,
-                rowCount = 10,
-                cellContent = { columnIndex, rowIndex ->
-                    MyText(" Column: $columnIndex - Row: $rowIndex ")
-                })
+            MyButton(buttonText, setValue = setValue, enabled = isEnabled)
+            when(isEnabled) {
+                true ->  MyTable (
+                    modifier = Modifier.fillMaxHeight().padding(6.dp),
+                    columnCount = 3,
+                    rowCount = 10,
+                    cellContent = { columnIndex, rowIndex ->
+                        MyText(" Column: $columnIndex - Row: $rowIndex ")
+                    }
+                )
+                false -> Image(
+                    painter = painterResource("/drawable/download.jpeg"),
+                    contentDescription = "dog",
+                    modifier = Modifier.fillMaxSize()
+                )
+            }
+
+
         }
     }
 }
