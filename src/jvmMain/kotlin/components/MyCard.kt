@@ -15,12 +15,12 @@ import data.LineSubstring
 @Preview
 @Composable
 fun MyCard() {
-    var isEnabled by remember { mutableStateOf(true)  } ;
+    var isEnabled by remember { mutableStateOf(true) };
     var buttonText by remember { mutableStateOf("Show image") }
     val setValue = {
         println(isEnabled)
         isEnabled = !isEnabled
-        buttonText = when(isEnabled) {
+        buttonText = when (isEnabled) {
             true -> "Show image"
             false -> "Show table"
         }
@@ -50,8 +50,8 @@ fun MyCard() {
                 )
             )
             MyButton(buttonText, setValue = setValue, enabled = isEnabled)
-            when(isEnabled) {
-                true ->  MyTable (
+            when (isEnabled) {
+                true -> MyTable(
                     modifier = Modifier.fillMaxHeight().padding(6.dp),
                     columnCount = 3,
                     rowCount = 10,
@@ -59,6 +59,7 @@ fun MyCard() {
                         MyText(" Column: $columnIndex - Row: $rowIndex ")
                     }
                 )
+
                 false -> Image(
                     painter = painterResource("/drawable/download.jpeg"),
                     contentDescription = "dog",
